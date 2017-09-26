@@ -12,7 +12,7 @@ class Action extends MActiveRecord
         return '`lms_action`';
     }
 
-    public function getAllMenu()()
+    public function getAllMenu()
     {
         $sql = "select * from `lms_action` where is_menu>=1 order by menusort desc";
         $conn = Yii::app()->db_frame;
