@@ -13,7 +13,8 @@ class MainModule extends CWebModule
                 'main.components.*',
                 'main.widgets.*',
                 'main.models.*',
-                'main.models.user.*'
+                'main.models.user.*',
+                'main.models.manage.*'
             )
         );
          Yii::app()->setComponents(array(

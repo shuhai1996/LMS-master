@@ -64,7 +64,7 @@ class User extends MActiveRecord
                 SELECT u.*,a.aid,a.aname,a.route,a.is_menu,a.first_menu  
                 FROM `lms_user` u 
                 INNER JOIN `lms_role_action` ra ON u.rid=ra.rid
-                INNER JOIN `m-action` a ON ra.aid=a.aid
+                INNER JOIN `lms_action` a ON ra.aid=a.aid
                 where {$condition};
             ";
         } else {
@@ -72,7 +72,7 @@ class User extends MActiveRecord
                 SELECT u.*,a.aid,a.aname,a.route,a.is_menu,a.first_menu 
                 FROM `lms_user` u 
                 INNER JOIN `lms_role_action` ra ON u.rid=ra.rid
-                INNER JOIN `m-action` a ON ra.aid=a.aid
+                INNER JOIN `lms_action` a ON ra.aid=a.aid
             ";
         }
         $conn = Yii::app()->db_frame;
