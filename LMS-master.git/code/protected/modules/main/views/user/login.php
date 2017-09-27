@@ -71,7 +71,7 @@ function slay2(num)
     </DIV>
     
     </DIV>
-    <div class="Copyright">Copyright© 2012 Open Vision. 版权所有</div>
+    <div class="Copyright">Copyright© 2017 Open Vision. 版权所有余航</div>
 </div>
 <script type="text/javascript">
 $("#registerid").click(function(){
