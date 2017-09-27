@@ -12,7 +12,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title>backadmin后台登录</title>
+	<title>后台登录</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
@@ -208,7 +208,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 	<!-- END LOGIN -->
 	<!-- BEGIN COPYRIGHT -->
 	<div class="copyright">
-		2014 &copy; Back Admin by <a target="_blank" href="http://hucong.net">胡户主</a>.
+		2017 &copy; 图书馆管理系统 by 余航
 	</div>
 	<!-- END COPYRIGHT -->
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->

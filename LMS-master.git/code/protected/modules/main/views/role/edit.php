@@ -3,13 +3,13 @@
 <div class="col-md-6">
 <?php if($label=='has_role') { ?>
 <div class="alert alert-warning">
-    <strong>Error!</strong>已经有此路由信息
+    <strong>Error!</strong>已经有此角色信息
 </div>
 <?php } ?>
 <div class="portlet box green ">
     <div class="portlet-title">
         <div class="caption">
-            <i class="fa fa-reorder"></i> Route Edit
+            <i class="fa fa-reorder"></i>  Route Edit
         </div>
         <div class="tools">
             <a href="" class="collapse"></a>
