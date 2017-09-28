@@ -116,7 +116,7 @@
 
         var id = $(this).data("id");
         $.post(
-            "/main/book/del", 
+            "/main/borrow/del", 
             {"id": id},
             function(data) {
                 console.log(data);

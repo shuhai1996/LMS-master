@@ -19,7 +19,7 @@ class UserController extends BackController
     public function actionInitSystem()
     {
         //todo 增加权限限制
-        exit;
+       // exit;
         InitSystem::initActions();
         InitSystem::initSupperUser('superman','superman');
         InitSystem::initRoles();

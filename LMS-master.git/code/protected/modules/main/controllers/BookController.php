@@ -53,8 +53,8 @@ class BookController extends BackController
         $criteria->limit = $pageLen;
         $criteria->offset = $pageStart;
         $criteria->order = $colNames[$orderCol]." ".$orderDir;
-        $bookInfos = Book::model()->getAllBook($criteria);
-       // var_dump($bookInfos);
+        $bookInfos = Book::model()->findAll($criteria);
+       // var_dump($bookInfos);die();
 
         $entitys = array();
         foreach ($bookInfos as $v) {

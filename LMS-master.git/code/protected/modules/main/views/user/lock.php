@@ -64,7 +64,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 			</div>
 		</div>
 		<div class="page-footer">
-			2014 &copy; Back Admin by hucong.
+			2017 &copy;图书管理系统by 余航.
 		</div>
 	</div>
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->

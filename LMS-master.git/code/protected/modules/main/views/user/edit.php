@@ -4,7 +4,7 @@
 <div class="col-md-6">
 <?php if($label=='has_usr') { ?>
 <div class="alert alert-warning">
-  <strong>Error!</strong>已经有此路由信息
+  <strong>Error!</strong>已经有此用户信息
 </div>
 <?php } ?>
 <div class="portlet box green ">
@@ -46,7 +46,9 @@
             <input type="text" class="form-control"  name='email' value='<?php echo !empty($entity['email']) ? htmlspecialchars($entity['email']):''; ?>' placeholder="<?php echo !empty($entity['email']) ? htmlspecialchars($entity['email']):''; ?>" >
           </div>
         </div>
-        <div id='rolemenu' class="form-group" >
+        
+        <div id='rolemenu' class="form-group" <?php if($entity['rid']!=1)echo htmlspecialchars("hidden")
+        ?>> 
           <label  class="col-md-3 control-label">用户角色</label>
           <div class="col-md-9">
             <select name='rid' class="form-control">
@@ -76,7 +78,9 @@
     $('#rolemenu select').val('<?php echo isset($entity["rid"]) ?  htmlspecialchars($entity["rid"]) : "1";?>');
 
     $('#cancel').on("click",function(){
+        if($("input[name='role']").value=='1')
         location.href="/main/user/list";
+         else location.href="/site/index";
     });
 })(jQuery)
 </script>

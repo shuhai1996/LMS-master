@@ -1,4 +1,6 @@
-
+<div hidden> 
+    <input type="text" class="form-control"  name='userid' value='<?php if(!empty($this->userInfo)) echo htmlspecialchars($this->userInfo["uid"]);?>'>
+</div>
 <!-- BEGIN EXAMPLE TABLE PORTLET-->
 <div class="portlet box blue">
     <div class="portlet-title">
@@ -12,7 +14,12 @@
     </div>
     <div class="portlet-body">
         <div class="table-toolbar">
-            <div class="btn-group pull-right">
+            <div class="btn-group">
+                <a href="/site/index" id="add_new" class="btn green">
+                借书 <i class="fa fa-plus"></i>
+                </a>
+            </div>
+            <div class="btn-group pull-right">  
                 <button class="btn dropdown-toggle" data-toggle="dropdown">工具栏 <i class="fa fa-angle-down"></i>
                 </button>
                 <ul class="dropdown-menu pull-right">
@@ -26,7 +33,6 @@
             <thead>
                 <tr>
                     <th>图书名称</th>
-                    <th>借阅人</th>
                     <th>借阅时间</th>
                     <th>应还时间</th>
                     <th>是否已还</th>
@@ -73,7 +79,7 @@
         ], // 单页显示行数的下拉列表
         "bProcessing": true, // 打开处理中标签
         "bServerSide": true, // 打开ajax方式获取数据
-        "sAjaxSource": "/main/borrow/listajax",
+        "sAjaxSource": "/main/myborrow/listajax?id="+$('input[name="userid"]').val(),
         // set the initial value
         "iDisplayLength": 10, // 单页行数的初始值
         "sPaginationType": "bootstrap",
@@ -93,7 +99,6 @@
             'aTargets': [0]
         }],
         "aoColumns": [
-          null,
           null,
           null,
           null,

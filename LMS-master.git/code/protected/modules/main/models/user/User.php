@@ -7,6 +7,16 @@ class User extends MActiveRecord
         return parent::model($className);
     }
 
+    public static function findIdByUid($uid)
+    {
+        $sql = "select * from `lms_reader` where uid=".+$uid;
+        $conn = Yii::app()->db_frame;
+        $command = $conn->createCommand($sql);
+        $rows = $command->queryAll();
+        if($rows !=null)return $rows[0];
+        else return "";
+    }
+
     public function tableName()
     {
         return '`lms_user`';
@@ -88,4 +98,6 @@ class User extends MActiveRecord
     {
         $this->deleteByPk($id);
     }
+
+
 }
