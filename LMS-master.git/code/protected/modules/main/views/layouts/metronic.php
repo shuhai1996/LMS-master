@@ -37,7 +37,7 @@
    <!-- END MY STYLES -->
 
    <script src="/assets/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
-   <script src="/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+ 
    <link rel="shortcut icon" href="favicon.ico" />
 </head>
 
@@ -69,11 +69,9 @@
           <i class="fa fa-angle-down"></i>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="/main/user/edit?id=<?php echo htmlspecialchars($this->userInfo["uid"]);?>"><i class="fa fa-edit"></i>修改个人信息</a></li>
             <li><a href="javascript:;" id="trigger_fullscreen"><i class="fa fa-move"></i>全屏</a></li>
             <!--<li><a href="/main/user/lock"><i class="fa fa-lock"></i>锁屏</a></li>-->
             <li><a href="/main/user/logout"><i class="fa fa-key"></i>退出</a></li>
-            
           </ul>
         </li>
         <?php }?>
@@ -123,7 +121,7 @@
 <!-- BEGIN FOOTER -->
 <div class="footer">
     <div class="footer-inner">
-        2017 &copy; Program by <a target="_blank" href="#">余航</a>.
+        2017 &copy; All Rights Reserved.
     </div>
     <div class="footer-tools">
         <span class="go-top">
@@ -145,7 +143,6 @@
   <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
   <script src="/assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
   <script src="/assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-  <script src="/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
   <script src="/assets/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript" ></script>
   <script src="/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
   <script src="/assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>  

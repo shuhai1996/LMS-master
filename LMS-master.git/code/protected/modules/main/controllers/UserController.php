@@ -62,9 +62,10 @@ class UserController extends BackController
             $data = array(
                 0=>$v['uid'],
                 1=>$v['uname'],
-                2=>$v['email'],
-                3=>$t['rname']  ,
-                4=>'<a class="btn btn-sm red" href="/main/user/edit?id='.$v["uid"].'"><i class="fa fa-edit"></i></a> '.
+                2=>$v['nickname'],
+                3=>$v['email'],
+                4=>$t['rname']  ,
+                5=>'<a class="btn btn-sm red" href="/main/user/edit?id='.$v["uid"].'"><i class="fa fa-edit"></i></a> '.
                 '<a class="delete btn btn-sm red" data-id="'.$v["uid"].'"><i class="fa fa-times"></i></a>',
             );
             $entitys[] = $data;

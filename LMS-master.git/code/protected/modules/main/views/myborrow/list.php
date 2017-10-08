@@ -107,26 +107,22 @@
         ] 
     });
 
-    $('#datatable').delegate('a.delete','click', function (e) {
+    $('#datatable').delegate('a#btncont','click', function (e) {
         e.preventDefault();
 
-        if (confirm("Are you sure to delete this row ?") == false) {
+        if (confirm("你确定要续借这本书吗?") == false) {
             return;
         }
-
-        var id = $(this).data("id");
+         var id = $(this).data("id");
         $.post(
-            "/main/book/del", 
+            "/main/myborrow/cont", 
             {"id": id},
             function(data) {
-                console.log(data);
+            console.log(data);   
             }, 
             "post"
         ); 
-        
-        var nRow = $(this).parents('tr')[0];
-        console.log(nRow);
-        oTable.fnDeleteRow(nRow);
+       window.location.href="/main/myborrow/list"
     });
 
 

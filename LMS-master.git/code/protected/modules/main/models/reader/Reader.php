@@ -14,8 +14,7 @@ class Reader extends CActiveRecord
     {
         $sql = "select * from `lms_reader` where uid=".+$uid;
         $conn = Yii::app()->db_frame;
-        
-        if$command = $conn->createCommand($sql);
+        $command = $conn->createCommand($sql);
         $rows = $command->queryAll();
         if($rows !=null)return $rows[0];
         else return "";

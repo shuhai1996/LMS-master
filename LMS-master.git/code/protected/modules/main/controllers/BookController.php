@@ -66,7 +66,7 @@ class BookController extends BackController
                 3=>$t['typeid'],
                 4=>$t['from'],
                 5=>$t['location'],
-                6=>'<a class="btn btn-sm red" href="/main/user/edit?id='.$v["bid"].'"><i class="fa fa-edit"></i></a> '.
+                6=>'<a class="btn btn-sm red" href="/main/book/edit?id='.$v["bid"].'"><i class="fa fa-edit"></i></a> '.
                 '<a class="delete btn btn-sm red" data-id="'.$v["bid"].'"><i class="fa fa-times"></i></a>',
             );
             $entitys[] = $data;
@@ -84,66 +84,84 @@ class BookController extends BackController
 
   
 
-    // public function actionEdit()
-    // {
-    //     //echo "<pre>";var_dump($_REQUEST);exit;
-    //     $usr = new User;
-    //     $role = new Role;
-    //     $usrInfo = array();
-    //     $label = '';
-    //     foreach($_REQUEST as $k=>$v) {
-    //         $_REQUEST[$k] = trim($v);
-    //     }
-
-    //     // 获取role列表
-    //     $roleInfos = $role->findAll(array('select'=>'rid,rname'));
-    //     // 过滤超极管理员
-    //     foreach($roleInfos as $role) {
-    //         if($role['rname']!='superman') $roles[] = $role;
-    //     }
-    //     // var_dump($_REQUEST); exit;
-    //     // 
-    //     if(isset($_REQUEST['id'])&&$_REQUEST['id']!='') {
-    //         // 修改
-    //         $usrInfo = $usr->getUserWithRole('uid=:uid',array(':uid'=>$_REQUEST['id']));
-    //         $usrInfo = $usrInfo[0];
-    //         if(isset($_REQUEST['modify'])) {
-    //             $usr->updateByPk($_REQUEST['id'],array(
-    //                 'uname'=>$_REQUEST['name'],
-    //                 'email'=>$_REQUEST['email'],
-    //                 'pwd'=>Login::pwdEncry($_REQUEST['pwd']),
-    //                 'rid'=>$_REQUEST['rid'],
-    //             ));
-    //             $this->redirect('/main/user/list');
-    //         }
-    //     } elseif(!empty($_REQUEST['name'])) {
-    //         // 新增
-    //         $usrInfo = $usr->getUserWithRole('uname=:name',array(':name'=>$_REQUEST['name']));
-    //         //var_dump($usrInfo);exit;
-    //         if(!empty($usrInfo)) {
-    //             $this->render('edit',array('roles'=>$roles,'entity'=>$usrInfo[0],'label'=>'has_usr'));
-    //             exit;
-    //         }
-    //         if(isset($_REQUEST['modify'])) {
-    //             $usr->uname = $_REQUEST['name'];
-    //             $usr->email = $_REQUEST['email'];
-    //             $usr->pwd = Login::pwdEncry($_REQUEST['pwd']);
-    //             $usr->rid = $_REQUEST['rid'];
-    //             $usr->save();
-    //             $this->redirect('/main/user/list');
-    //         }
-    //     }
-
-    //     $this->render('edit',array('entity'=>$usrInfo,'roles'=>$roles,'label'=>$label));
-    // }
-
+   public function actionEdit()
+    {
+        //echo "<pre>";var_dump($_REQUEST);exit;
+        //var_dump($_REQUEST);exit;
+        $book = new Book;
+        $bookInfo = array();
+        //$bookInfo=$book->find();
+        $booktype = new BookType;
+        $typeinfos = $booktype->findAll(array('select'=>'id,name'));
+        $label = '';
+        foreach($_REQUEST as $k=>$v) {
+            $_REQUEST[$k] = trim($v);
+        }
+        foreach ($typeinfos as $type){
+            $types[] = $type;
+        }
+        //var_dump($_REQUEST);exit;
+        if(isset($_REQUEST['id'])&&$_REQUEST['id']!='') {
+            // 修改
+            $bookInfo = $book->getBookType('bid=:bid',array(':bid'=>$_REQUEST['id']));
+            $bookInfo = $bookInfo[0];
+            //var_dump($_REQUEST);exit;
+            if(isset($_REQUEST['modify'])) {
+                $book->updateByPk($_REQUEST['id'],array(
+                    'bookcode'=>$_REQUEST['bookcode'],
+                    'bookname'=>$_REQUEST['bookname'],
+                    'typeid'=>$_REQUEST['typeid'],
+                    'author'=>$_REQUEST['author'],
+                    'from'=>$_REQUEST['from'],
+                    'price'=>$_REQUEST['price'],
+                    'page'=>$_REQUEST['page'],
+                    'location'=>$_REQUEST['location'],
+                    'stroge'=>$_REQUEST['stroge'],
+                    'in_time'=>$_REQUEST['in_time']
+                ));
+                //var_dump($bookInfo);exit;
+                $this->redirect('/main/book/list');
+            }
+        }elseif(!empty($_REQUEST['bookcode'])) {
+            // 新增
+            $bookInfo = $book->getBookType('bookcode=:bookcode',array(':bookcode'=>$_REQUEST['bookcode']));
+            if(!empty($bookInfo)) {
+                
+                $this->render('edit',array('types'=>$types,'entity'=>$bookInfo,'label'=>'has_book'));
+                exit;
+            }
+            if(isset($_REQUEST['modify'])) {
+                $book->bookcode= $_REQUEST['bookcode'];
+                $book->bookname = $_REQUEST['bookname'];
+                $book->typeid = $_REQUEST['typeid'];
+                $book->author = $_REQUEST['author'];
+                $book->from = $_REQUEST['from'];
+                $book->price = $_REQUEST['price'];
+                $book->page = $_REQUEST['page'];
+                $book->location = $_REQUEST['location'];
+                $book->in_time = $_REQUEST['in_time'];
+                $book->stroge = $_REQUEST['stroge'];
+                $book->save();
+                //var_dump($book);exit;
+                $this->redirect('/main/book/list');
+                
+            }
+        }        
+        $this->render('edit',array('types'=>$types,'entity'=>$bookInfo,'label'=>$label));
+    }
    
 
-//     // 删除用户
-//     public function actionDel()
-//     {
-//         User::model()->delUser($_REQUEST['id']);
-//     }
+     public function actionDel()
+        {
+            $id = isset($_REQUEST['id']) ? intval($_REQUEST['id']) : '';
+            if($id!='') {
+                $ret = Book::model()->deleteByPk($id);
+                //RoleAction::model()->deleteAll('bid=:bid',array(':bid'=>$id));
+                //var_dump($ret);
+            } else {
+                echo "fail";
+            }
+        }
 
 //     public function validateAccount($account)
 //     {
