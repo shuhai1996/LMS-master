@@ -59,10 +59,12 @@ class BorrowController extends BackController
         $entitys = array();
         foreach ($borrowInfos as $v) {
             $t = Book::model()->find("bid={$v['bookid']}");
+            $r = Reader::model()->find("id={$v['readerid']}");
+            $n=User::model()->find("uid={$r['uid']}");
             if($v['is_back'])$is_back="是";else $is_back="否";
             $data = array(
                 0=>$t['bookname'],
-                1=>$v['readerid'],
+                1=>$n['nickname'],
                 2=>$v['borrow_time'],
                 3=>$v['back_time'],
                 4=>$is_back,
@@ -112,10 +114,8 @@ class BorrowController extends BackController
 
           // var_dump($_REQUEST);exit;
             if(!empty($_REQUEST['modify'])) {
-                $array=$borrow->updateBorrow($_REQUEST);
-                if($array['is_update'])
+                $borrow->updateBorrow($_REQUEST);
                 $this->redirect('/main/borrow/list');
-               else {echo "操作失败";exit;}
             }
         } elseif(!empty($_REQUEST['name'])) {
             // 新增

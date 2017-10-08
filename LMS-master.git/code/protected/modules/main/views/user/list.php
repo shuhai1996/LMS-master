@@ -31,6 +31,7 @@
                 <tr>
                     <th>ID</th>
                     <th>用户名</th>
+                    <th>昵称</th>
                     <th>邮箱</th>
                     <th>身份</th>
                     <th>操作</th>
@@ -90,10 +91,10 @@
         ] 
     });
 
-    $('#datatable').delegate('a.delete','click', function (e) {
-        e.preventDefault();
+   $('#datatable').delegate('a.delete','click', function (e) {        
+     e.preventDefault();
 
-        if (confirm("Are you sure to delete this row ?") == false) {
+       if (confirm("Are you sure to delete this row ?") == false) {
             return;
         }
 
@@ -110,6 +111,6 @@
         var nRow = $(this).parents('tr')[0];
         oTable.fnDeleteRow(nRow);
     });
- 
-})(jQuery);
+
+ })(jQuery);
 </script>

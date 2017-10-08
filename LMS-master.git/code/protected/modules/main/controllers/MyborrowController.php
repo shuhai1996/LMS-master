@@ -68,7 +68,7 @@ class MyborrowController extends BackController
                 1=>$v['borrow_time'],
                 2=>$v['back_time'],
                 3=>$is_back,
-                4=>'<a class="btn btn-sm red" href="/main/user/edit?id='.$v["id"].'">续借</a> '
+                4=>'<a class="btn btn-sm red" id="btncont" data-id="'.$v["id"].'">续借</a> '
                 
             );
             $entitys[] = $data;
@@ -85,93 +85,20 @@ class MyborrowController extends BackController
 
     }
 
-  
-
-    // public function actionEdit()
-    // {
-    //     //echo "<pre>";var_dump($_REQUEST);exit;
-    //     $usr = new User;
-    //     $role = new Role;
-    //     $usrInfo = array();
-    //     $label = '';
-    //     foreach($_REQUEST as $k=>$v) {
-    //         $_REQUEST[$k] = trim($v);
-    //     }
-
-    //     // 获取role列表
-    //     $roleInfos = $role->findAll(array('select'=>'rid,rname'));
-    //     // 过滤超极管理员
-    //     foreach($roleInfos as $role) {
-    //         if($role['rname']!='superman') $roles[] = $role;
-    //     }
-    //     // var_dump($_REQUEST); exit;
-    //     // 
-    //     if(isset($_REQUEST['id'])&&$_REQUEST['id']!='') {
-    //         // 修改
-    //         $usrInfo = $usr->getUserWithRole('uid=:uid',array(':uid'=>$_REQUEST['id']));
-    //         $usrInfo = $usrInfo[0];
-    //         if(isset($_REQUEST['modify'])) {
-    //             $usr->updateByPk($_REQUEST['id'],array(
-    //                 'uname'=>$_REQUEST['name'],
-    //                 'email'=>$_REQUEST['email'],
-    //                 'pwd'=>Login::pwdEncry($_REQUEST['pwd']),
-    //                 'rid'=>$_REQUEST['rid'],
-    //             ));
-    //             $this->redirect('/main/user/list');
-    //         }
-    //     } elseif(!empty($_REQUEST['name'])) {
-    //         // 新增
-    //         $usrInfo = $usr->getUserWithRole('uname=:name',array(':name'=>$_REQUEST['name']));
-    //         //var_dump($usrInfo);exit;
-    //         if(!empty($usrInfo)) {
-    //             $this->render('edit',array('roles'=>$roles,'entity'=>$usrInfo[0],'label'=>'has_usr'));
-    //             exit;
-    //         }
-    //         if(isset($_REQUEST['modify'])) {
-    //             $usr->uname = $_REQUEST['name'];
-    //             $usr->email = $_REQUEST['email'];
-    //             $usr->pwd = Login::pwdEncry($_REQUEST['pwd']);
-    //             $usr->rid = $_REQUEST['rid'];
-    //             $usr->save();
-    //             $this->redirect('/main/user/list');
-    //         }
-    //     }
-
-    //     $this->render('edit',array('entity'=>$usrInfo,'roles'=>$roles,'label'=>$label));
-    // }
-
    
 
-//     // 删除用户
-//     public function actionDel()
-//     {
-//         User::model()->delUser($_REQUEST['id']);
-//     }
+    // 续借操作
+    public function actionCont()
+    {
+        $borrow = new Borrow;
+        $id=$_REQUEST['id'];
+        $a=Borrow::model()->find("id={$id}");
+        $oldtime=$a['back_time'];
+        $newtime=date("Y-m-d",strtotime("$oldtime +10 day"));
+       // var_dump($newtime);die();
+        $array = array('id' =>$id ,'newtime'=>$newtime);
+        $borrow->cont($array);
+    }
 
-//     public function validateAccount($account)
-//     {
-//         //echo "11111";exit;
-//         //echo $account;
-//         //$result = preg_match(self::ACCOUNT_PATTERN, $account, $match);
-//         //var_dump(self::ACCOUNT_PATTERN, $account,$result,$match);exit;
-//         if (preg_match(self::ACCOUNT_PATTERN, $account, $match))
-//         {
-//             //echo "fuck,world";exit;
-//             return true;
-//         }
-//         else
-//         {
-//             //echo "hello,world";exit;
-//             return false;
-//         }
-//     }
-//     public function jsonResult($retCode = 0, $info = array())
-//     {
-//         $result = array('retCode' => $retCode,
-//             'msg' => self::$msgArray[$retCode],
-//             'info' => $info);
 
-//         echo json_encode($result);
-//         exit;
-//     }
  }
