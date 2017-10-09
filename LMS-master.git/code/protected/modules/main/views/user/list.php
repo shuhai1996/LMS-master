@@ -91,10 +91,10 @@
         ] 
     });
 
-   $('#datatable').delegate('a.delete','click', function (e) {        
-     e.preventDefault();
+    $('#datatable').delegate('a.delete','click', function (e) {
+        e.preventDefault();
 
-       if (confirm("Are you sure to delete this row ?") == false) {
+        if (confirm("Are you sure to delete this row ?") == false) {
             return;
         }
 
@@ -111,6 +111,6 @@
         var nRow = $(this).parents('tr')[0];
         oTable.fnDeleteRow(nRow);
     });
-
- })(jQuery);
+ 
+})(jQuery);
 </script>

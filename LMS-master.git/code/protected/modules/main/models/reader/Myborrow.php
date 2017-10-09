@@ -19,7 +19,7 @@ class MyBorrow extends CActiveRecord
         $rows = $command->queryAll();
         return $rows;
     }
-
+    
 
     public static function model($className=__CLASS__)
     {

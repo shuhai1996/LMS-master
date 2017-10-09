@@ -23,19 +23,21 @@ class SiteController extends BackController
     
     public function actionListajax()
     {
+        //var_dump($_REQUEST);exit;
         $pageStart = isset($_REQUEST["iDisplayStart"]) ? intval($_REQUEST["iDisplayStart"]) : 0;
         $pageLen = isset($_REQUEST["iDisplayLength"]) ? intval($_REQUEST["iDisplayLength"]) : 10;
         $orderCol = isset($_REQUEST["iSortCol_0"]) ? intval($_REQUEST["iSortCol_0"]) : 0;
         $orderDir = isset($_REQUEST["sSortDir_0"])&&in_array($_REQUEST["sSortDir_0"], array("asc","desc")) ? $_REQUEST["sSortDir_0"] : "asc";
-        $searchContent = isset($_REQUEST["sSearch"]) ? $_REQUEST["sSearch"] : "";
-        
-        
+        //搜索条件
+        $searchCode = isset($_REQUEST["code"]) ? $_REQUEST["code"] : "";
+        $searchName = isset($_REQUEST["name"]) ? $_REQUEST["name"] : "";
+
         $colNames = Book::model()->attributeNames();
         $totalNum = Book::model()->count();
         $numAfterFilter = Book::model()->count();
         $criteria=new CDbCriteria;
         $criteria->select = '*';// 只选择 'title' 列
-        $criteria->condition = "bookcode like '%{$searchContent}%'";
+        $criteria->condition = "bookcode like '%{$searchCode}%' and bookname like '%{$searchName}%'";
         //$criteria->condition = "bookname like '%php%'";
         $criteria->limit = $pageLen;
         $criteria->offset = $pageStart;
@@ -45,22 +47,23 @@ class SiteController extends BackController
         
         $entitys = array();
         foreach ($bookInfos as $v) {
-            $t = BookType::model()->find("id={$v['typeid']}");
+           // $t = BookType::model()->find("id={$v['typeid']}");
             $data = array(
                 0=>$v['bid'],
                 1=>$v['bookcode'],
                 2=>$v['bookname'],
                 3=>$v['author'],
                 4=>$v['from'],
-                5=>$t['name'],
+                5=>$v['typeid'],
                 6=>$v['stroge'],
                 7=>$v['location'],
             );
             $entitys[] = $data;
         }
-        
+      $sEcho=$_REQUEST['aoData']["0"]["value"];
+      //var_dump($sEcho);exit;
         $retData = array(
-            "sEcho" => intval($_REQUEST['sEcho']),
+            "sEcho" => intval($sEcho),
             "iTotalRecords" => $totalNum,
             "iTotalDisplayRecords" => $numAfterFilter,
             "aaData" => $entitys,

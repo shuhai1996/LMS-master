@@ -32,7 +32,7 @@ class BookController extends BackController
     }
     public function actionListajax()
     {
-        //var_dump("??");die();
+        //var_dump($_REQUEST);die();
         //echo "<pre>";var_dump($_REQUEST);exit;
         $pageStart = isset($_REQUEST["iDisplayStart"]) ? intval($_REQUEST["iDisplayStart"]) : 0;
         $pageLen = isset($_REQUEST["iDisplayLength"]) ? intval($_REQUEST["iDisplayLength"]) : 10;
@@ -59,11 +59,12 @@ class BookController extends BackController
         $entitys = array();
         foreach ($bookInfos as $v) {
             $t = Book::model()->find("bid={$v['bid']}");
+            $type=BookType::model()->find("id={$v['typeid']}");
             $data = array(
                 0=>$v['bookcode'],
                 1=>$v['bookname'],
                 2=>$v['author'],
-                3=>$t['typeid'],
+                3=>$type['name'],
                 4=>$t['from'],
                 5=>$t['location'],
                 6=>'<a class="btn btn-sm red" href="/main/book/edit?id='.$v["bid"].'"><i class="fa fa-edit"></i></a> '.
