@@ -7,7 +7,7 @@ class SiteController extends BackController
     
     public function actionIndex()
     {
-        $this->redirect('search');
+        $this->redirect('/site/search');
     }
     public function actionSearch()
     {
