@@ -201,7 +201,11 @@
         //     var result = eval('(' + data.d + ')');  
         //     alert(result.code);  
         // }  
+<<<<<<< HEAD
        window.location.href="/main/myborrow/list"
+=======
+       //window.location.href="/main/myborrow/list"
+>>>>>>> bfb691040fd594646e6933b7c65fd8c42f33b25e
     });
 
 
