@@ -1,5 +1,8 @@
 <!-- BEGIN EXAMPLE TABLE PORTLET-->
 <form id='form1' name='search' method="post" action="result"> 
+  <div hidden>
+  <input type="text" name="uid" value="<?php echo htmlspecialchars($this->userInfo["uid"]);?>"/>
+  </div>
  <tr>
   <td>关键字&nbsp;:
      <select name="keyword">
@@ -39,6 +42,7 @@
                     <th>类型</th>
                     <th>库存</th>
                     <th>馆藏</th>
+                    <th>操作</th>
                 </tr>
             </thead>
             <tbody></tbody>
@@ -110,6 +114,7 @@
           null,
           null,
           null,
+          null,
           { "bSearchable": true}
         ] ,
        "bFilter":false
@@ -118,6 +123,87 @@
 
 
     });
+
+       //借阅图书jquery
+       $('#datatable').delegate('a#btncont','click', function (e) {
+        e.preventDefault();
+
+        if (confirm("你确定要借阅这本书吗?") == false) {
+            return;
+        }
+
+         var reader = $("input[name='uid']").val();
+         var bid=$(this).data("id");
+         var mydate=new Date();
+         var str = "" + mydate.getFullYear() + "-";
+            str += (mydate.getMonth()+1) + "-";
+            str += mydate.getDate();
+         var rentdate=str;
+         var backdate=AddDays(mydate,30);
+
+         function AddDays(date,days){
+            var nd = new Date(date);
+            nd = nd.valueOf();
+            nd = nd + days * 24 * 60 * 60 * 1000;
+             nd = new Date(nd);
+             //alert(nd.getFullYear() + "年" + (nd.getMonth() + 1) + "月" + nd.getDate() + "日");
+            var y = nd.getFullYear();
+            var m = nd.getMonth()+1;
+            var d = nd.getDate();
+            if(m <= 9) m = "0"+m;
+            if(d <= 9) d = "0"+d; 
+            var cdate = y+"-"+m+"-"+d;
+            return cdate;
+            }
+
+         //alert(backdate);
+        //  var jqxhr =$.post(
+        //     "/main/borrow/add", 
+        //     {"reader": reader,"bid":bid,"rentdate":rentdate,"backdate":backdate},
+        //     function(msg) {
+        //       $(".result").html(msg);
+        //   var data='';
+        //   if(msg!=''){
+        //     data = eval("("+msg+")");    //将返回的json数据进行解析，并赋给data
+        //   }
+            
+        //      console.log(data); 
+        //     //callback(data);  
+        //     }, 
+        //     "post",
+        //     "text",
+
+        // );
+        // 
+        
+        $.ajax({
+                    url: "/main/borrow/add",  
+                    type: "POST",
+                    dataType:"json",
+                    async:false,
+                    data:{"reader": reader,"bid":bid,"rentdate":rentdate,"backdate":backdate},
+                    success: function(data){  
+                        var result=data['success'];
+                         if(result)alert('成功借阅！');else alert("操作失败或者已借阅该图书！");
+                                   },
+                    error: function(){  
+                        alert('Error loading XML document');  
+                    },                   
+                   /* ,  
+                    success: function(data,status){//如果调用php成功    
+                        alert(unescape(data));//解码，显示汉字
+                    } */
+                });
+
+
+        // function callback(data) {  
+        //     //解析json格式数据  
+        //     var result = eval('(' + data.d + ')');  
+        //     alert(result.code);  
+        // }  
+       //window.location.href="/main/myborrow/list"
+    });
+
 
   })(jQuery);
 </script>

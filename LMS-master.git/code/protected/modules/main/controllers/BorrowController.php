@@ -90,61 +90,95 @@ class BorrowController extends BackController
     {
         //echo "<pre>";var_dump($_REQUEST);exit;
         $borrow = new Borrow;
-        $borrowInfos = array();
+        $borrowInfo = array();
+        $readername='';
         $label = '';
-        //var_dump($_REQUEST);die();
-        // foreach($_REQUEST as $k=>$v) {
-        //     if($k!='actions'&&$k!='positions')
-        //         $_REQUEST[$k] = trim($v);
-        // }
-        // // action 列表 展现
-        // $action = new Action;
-        // $actionList = $action->findAll('1=1 order by is_menu desc, route desc');
-        // $retActions = array();
-        // foreach ($actionList as $v) {
-        //     $parts = explode("/",$v['route']);
-        //     //if(!isset($parts[1])) continue;
-        //     if(!isset($parts[1])) $retActions["noroute"][]=$v->getAttributes();
-        //     $retActions[$parts[1]][] = $v->getAttributes();
-        // }
-        //echo "<pre>";var_dump($retActions);exit;
+        //var_dump($_REQUEST);exit;
         if(isset($_REQUEST['id'])&&$_REQUEST['id']!='') {
             // 修改
-            $borrowInfo = $borrow->find($_REQUEST['id']);
-
-          // var_dump($_REQUEST);exit;
+            $borrowInfo = $borrow->find("id={$_REQUEST['id']}");
+             $reader= Reader::model()->find("id={$borrowInfo['readerid']}");
+             $u=User::model()->find("uid={$reader['uid']}");
+             $readername=$u['nickname'];
             if(!empty($_REQUEST['modify'])) {
                 $borrow->updateBorrow($_REQUEST);
                 $this->redirect('/main/borrow/list');
             }
-        } elseif(!empty($_REQUEST['name'])) {
-            // 新增
-            $roleInfo = $role->find('rname=:name',array(':name'=>$_REQUEST['name']));
+        } elseif(!empty($_REQUEST['bookid'])) {
+             //新增
+            // var_dump($_REQUEST);exit;
+            //$roleInfo = $role->find('rname=:name',array(':name'=>$_REQUEST['name']));
             if(!empty($borrowInfo)) {
                 $borrowInfo = $borrowInfo->getAttributes();
                 // $borrowInfo['actions'] = RoleAction::model()->findActions($roleInfo['rid']);
-                $this->render('edit',array('action_list'=>$retActions,'entity'=>$borrowInfo,'label'=>'has_role'));
+                $this->render('edit',array('action_list'=>$retActions,'entity'=>$borrowInfo,'label'=>'has_borrow'));
                 exit;
             }
             if(!empty($_REQUEST['modify'])) {
-                $role->saveRole($_REQUEST);
-                $this->redirect('/main/role/list');
+                //$borrow->saveBorrow($_REQUEST);
+                $this->redirect('/main/borrow/list');
             }
         }
 
         // foreach($actionList as $k=>$v) {
             // echo "<pre>";var_dump($k,$v->getAttributes());
         // }exit;
-        $this->render('edit',array('entity'=>$borrowInfo,'label'=>$label));
+        // 
+        //var_dump($borrowInfo);exit;
+        //$this->render('edit',array('entity'=>$borrowInfo,'readername'=>$u['nickname'],'label'=>$label));
+        $this->render('edit',array('entity'=>$borrowInfo,'readername'=>$readername,'label'=>$label));
     }
 
-   
+    // 借阅操作
+    public function actionAdd()
+    {
+        $reader=Reader::model()->find("uid={$_REQUEST['reader']}");
+        $readerid=$reader['id'];
+        $flag=true;
+        $result = array();
+        $olds=Borrow::model()->findAll("readerid={$readerid}");
+        foreach ($olds as $v) {
+           if($v['bookid']==$_REQUEST['bid'])
+            $flag=false;
 
-//     // 删除用户
-//     public function actionDel()
-//     {
-//         User::model()->delUser($_REQUEST['id']);
-//     }
+        }
+        if($flag)
+          { $borrow=new Borrow;
+            $borrow->readerid=$readerid;
+            $borrow->bookid=$_REQUEST['bid'];
+            $borrow->borrow_time=$_REQUEST['rentdate'];
+            $borrow->back_time=$_REQUEST['backdate'];       
+        if($borrow->save()>0){
+           $result=array('success'=>true);
+            echo json_encode($result);
+        }else{
+            $result=array('success'=>false);
+            echo json_encode($result);
+        }
+        }
+      else 
+         {
+            $result=array('success'=>false);
+            echo json_encode($result);
+        }
+        //var_dump($olds);die();
+      
+
+    }
+
+
+    // 删除借阅信息
+    public function actionDel()
+    {
+         $id = isset($_REQUEST['id']) ? intval($_REQUEST['id']) : '';
+            if($id!='') {
+                $ret = Borrow::model()->deleteByPk($id);
+                //RoleAction::model()->deleteAll('bid=:bid',array(':bid'=>$id));
+                //var_dump($ret);
+            } else {
+                echo "fail";
+            }
+    }
 
 //     public function validateAccount($account)
 //     {

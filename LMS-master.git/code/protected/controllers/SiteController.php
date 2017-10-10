@@ -57,6 +57,7 @@ class SiteController extends BackController
                 5=>$v['typeid'],
                 6=>$v['stroge'],
                 7=>$v['location'],
+                8=>'<a class="btn btn-sm red" id="btncont" data-id="'.$v["bid"].'">预约借阅</a> ',
             );
             $entitys[] = $data;
         }
@@ -71,6 +72,8 @@ class SiteController extends BackController
         echo json_encode($retData);
         
     }
+
+ 
     
 }
 
