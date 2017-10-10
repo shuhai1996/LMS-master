@@ -10,7 +10,7 @@
 <div class="portlet box green ">
   <div class="portlet-title">
     <div class="caption">
-      <i class="fa fa-reorder"></i> Route Edit
+      <i class="fa fa-reorder"></i> 用户编辑
     </div>
     <div class="tools">
       <a href="" class="collapse"></a>
@@ -32,6 +32,12 @@
           <label  class="col-md-3 control-label">用户名</label>
           <div class="col-md-9">
             <input type="text" class="form-control"  name='name' value='<?php echo !empty($entity['uname']) ? htmlspecialchars($entity['uname']):''; ?>' placeholder="<?php echo !empty($entity['uname']) ? htmlspecialchars($entity['uname']):''; ?>" >
+          </div>
+        </div>
+         <div class="form-group">
+          <label  class="col-md-3 control-label">昵称</label>
+          <div class="col-md-9">
+            <input type="text" class="form-control"  name='nickname' value='<?php echo !empty($entity['nickname']) ? htmlspecialchars($entity['nickname']):''; ?>' placeholder="<?php echo !empty($entity['nickname']) ? htmlspecialchars($entity['nickname']):''; ?>" >
           </div>
         </div>
         <div class="form-group">

@@ -87,7 +87,7 @@
           null,
           null,
           null,
-		  null,
+          null,
           { "bSearchable": true}
         ] 
     });

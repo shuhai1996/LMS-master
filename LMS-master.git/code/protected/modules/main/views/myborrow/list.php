@@ -122,7 +122,7 @@
             }, 
             "post"
         ); 
-       window.location.href="/main/myborrow/list"
+       //window.location.href="/main/myborrow/list"
     });
 
 

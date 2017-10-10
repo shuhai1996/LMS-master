@@ -112,6 +112,7 @@ class UserController extends BackController
             if(isset($_REQUEST['modify'])) {
                 $usr->updateByPk($_REQUEST['id'],array(
                     'uname'=>$_REQUEST['name'],
+                    'nickname'=>$_REQUEST['nickname'],
                     'email'=>$_REQUEST['email'],
                     'pwd'=>Login::pwdEncry($_REQUEST['pwd']),
                     'rid'=>$_REQUEST['rid'],

@@ -28,6 +28,8 @@ class Borrow extends CActiveRecord
         ));
         
     }
+
+        
        
    public function updateBorrow(array $params)
     {
