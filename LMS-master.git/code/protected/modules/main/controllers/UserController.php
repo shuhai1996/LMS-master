@@ -129,6 +129,7 @@ class UserController extends BackController
             }
             if(isset($_REQUEST['modify'])) {
                 $usr->uname = $_REQUEST['name'];
+                $usr->nickname=$_REQUEST['nickname'];
                 $usr->email = $_REQUEST['email'];
                 $usr->pwd = Login::pwdEncry($_REQUEST['pwd']);
                 $usr->rid = $_REQUEST['rid'];
@@ -136,7 +137,7 @@ class UserController extends BackController
                 $this->redirect('/main/user/list');
             }
         }
-
+       // var_dump($usrInfo['rid']);exit; 
         $this->render('edit',array('entity'=>$usrInfo,'roles'=>$roles,'label'=>$label));
     }
 

@@ -28,7 +28,7 @@
    <link href="/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css"/>
    <link href="/assets/css/pages/tasks.css" rel="stylesheet" type="text/css"/>
-   <link href="/assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+   <link href="/assets/css/themes/darkblue.css" rel="stylesheet" type="text/css" id="style_color"/>
    <link href="/assets/css/custom.css" rel="stylesheet" type="text/css"/>
    <!-- END THEME STYLES -->
 

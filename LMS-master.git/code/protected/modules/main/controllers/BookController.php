@@ -147,7 +147,8 @@ class BookController extends BackController
                 $this->redirect('/main/book/list');
                 
             }
-        }        
+        }   
+        //var_dump($bookInfo);exit;     
         $this->render('edit',array('types'=>$types,'entity'=>$bookInfo,'label'=>$label));
     }
    

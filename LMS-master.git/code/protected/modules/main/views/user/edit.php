@@ -53,7 +53,7 @@
           </div>
         </div>
         
-        <div id='rolemenu' class="form-group" <?php if($entity['rid']!=1)echo htmlspecialchars("hidden")
+        <div id='rolemenu' class="form-group" <?php if($entity&&$entity['rid']!=1)echo htmlspecialchars("hidden")
         ?>> 
           <label  class="col-md-3 control-label">用户角色</label>
           <div class="col-md-9">

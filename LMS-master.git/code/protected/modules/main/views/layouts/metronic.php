@@ -28,7 +28,7 @@
    <link href="/assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css"/>
    <link href="/assets/css/pages/tasks.css" rel="stylesheet" type="text/css"/>
-   <link href="/assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+   <link href="/assets/css/themes/darkblue.css" rel="stylesheet" type="text/css" id="style_color"/>
    <link href="/assets/css/custom.css" rel="stylesheet" type="text/css"/>
    <!-- END THEME STYLES -->
 
@@ -64,7 +64,7 @@
         <?php if(!empty($this->userInfo)) {?>
         <li class="dropdown user">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-          <img alt="" src="/assets/img/avatar1_small.jpg"/>
+          <img alt="" src="/assets/img/avatar3_small.jpg"/>
           <span class="username"><?php echo htmlspecialchars($this->userInfo["uname"]);?></span>
           <i class="fa fa-angle-down"></i>
           </a>

@@ -47,14 +47,14 @@ class SiteController extends BackController
         
         $entitys = array();
         foreach ($bookInfos as $v) {
-           // $t = BookType::model()->find("id={$v['typeid']}");
+            $t = BookType::model()->find("id={$v['typeid']}");
             $data = array(
                 0=>$v['bid'],
                 1=>$v['bookcode'],
                 2=>$v['bookname'],
                 3=>$v['author'],
                 4=>$v['from'],
-                5=>$v['typeid'],
+                5=>$t['name'],
                 6=>$v['stroge'],
                 7=>$v['location'],
                 8=>'<a class="btn btn-sm red" id="btncont" data-id="'.$v["bid"].'">预约借阅</a> ',
