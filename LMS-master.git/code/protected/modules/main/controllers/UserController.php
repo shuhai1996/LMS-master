@@ -231,6 +231,12 @@ class UserController extends BackController
         $user->pwd = Login::pwdEncry($pwd);
         $user->rid = 2; // 登录用户 
         $user->save();
+        $newuser=User::model()->find("uname={$account}");
+        $reader = new Reader();
+        $reader->uid=$newuser['uid'];
+        $reader->typeid=2;
+        $reader->birthday="2001-9-8";
+        $reader->save();
         // $loginUserInfo = Login::logins($account,$pwd, 'notmingwen');
         // if(empty($loginUserInfo))
         // {
