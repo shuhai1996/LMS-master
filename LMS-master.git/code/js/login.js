@@ -206,11 +206,13 @@ var Login = function () {
 	            		type: "get",
 	            		url: "/main/user/register",
 	            		dataType: "json",
+	            		async:false,
 	            		success: function(result){
 					        //返回提示信息       
 					        //console.log(result);
 					        if(result.retCode==0) {
-					        	location.href='/site/index';
+					        	alert("注册成功！");
+					        	location.href='/main/user/login';
 					        } else {
 					        	// error
 					        	console.log(result.msg);
@@ -219,6 +221,7 @@ var Login = function () {
 					        }
 					    }
 	                });
+
 	            }
 	        });
 

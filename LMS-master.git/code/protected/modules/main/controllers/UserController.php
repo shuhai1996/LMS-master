@@ -103,7 +103,7 @@ class UserController extends BackController
         foreach($roleInfos as $role) {
             if($role['rname']!='superman') $roles[] = $role;
         }
-        // var_dump($_REQUEST); exit;
+         //var_dump($roles); exit;
         // 
         if(isset($_REQUEST['id'])&&$_REQUEST['id']!='') {
             // 修改
@@ -143,9 +143,17 @@ class UserController extends BackController
     //登录
     public function actionLogin()
     {
+
         $this->layout = '';
         $url = isset($_REQUEST['url']) ? $_REQUEST['url'] : '';
         $showregister = isset($_REQUEST['isreg']) ? $_REQUEST['isreg'] : '';
+       // var_dump($_REQUEST);die();
+        if($showregister)
+           { $this->render('login_soft',array(
+            'url' => $url,
+            'showregister' => $showregister,
+        ));
+        exit;}
         //echo "<pre>";var_dump($_REQUEST);exit;
         if(!empty($_POST['name'])&&!empty($_POST['pwd'])) 
         {
@@ -175,12 +183,14 @@ class UserController extends BackController
         $this->render('login_soft',array(
             'url' => $url,
             'showregister' => $showregister,
+           // 'infomsg'=>"欢迎使用图书管理系统beta 1.0"
         ));
     }
 
     //注册
     public function actionRegister()
     {
+        $this->layout = '';
         $account = isset($_REQUEST['name']) ? trim($_REQUEST['name']) : '';
         $pwd = isset($_REQUEST['pwd']) ? trim($_REQUEST['pwd']) : '';
         $pwdConfirm = isset($_REQUEST['pwdconfirm']) ? trim($_REQUEST['pwdconfirm']) : '';
@@ -221,13 +231,13 @@ class UserController extends BackController
         $user->pwd = Login::pwdEncry($pwd);
         $user->rid = 2; // 登录用户 
         $user->save();
-        $loginUserInfo = Login::logins($account,$pwd, 'notmingwen');
-        if(empty($loginUserInfo))
-        {
-            $loginUserInfo = Login::logins($account,$pwd,'mingwen');
-        }
+        // $loginUserInfo = Login::logins($account,$pwd, 'notmingwen');
+        // if(empty($loginUserInfo))
+        // {
+        //     $loginUserInfo = Login::logins($account,$pwd,'mingwen');
+        // }
         $this->jsonResult(0);
-    }
+       }
 
     // AJAX 重置密码邮件发送
     public function actionResetpwdEmail()

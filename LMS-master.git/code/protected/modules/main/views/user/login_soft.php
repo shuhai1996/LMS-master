@@ -41,8 +41,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!-- BEGIN BODY -->
 <body class="login">
 	<!-- BEGIN LOGO -->
-	<div class="logo">
-		<img src="/images/backadminlogo.png" alt="" /> 
+	<div class="logo" style="font-size:20px;">
+		<img src="" alt="图书馆管理系统" /> 
 	</div>
 	<!-- END LOGO -->
 	<!-- BEGIN LOGIN -->
@@ -76,13 +76,16 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 				<label class="checkbox" id="remember_user">
 				<input type="checkbox"  name="remember" value="1"/> 记住用户名
 				</label>
-				<button name="login_sub" type="submit" class="btn blue pull-right">
+				<button name="login_sub" type="submit" class="btn blue pull-center">
 				登录 <i class="m-icon-swapright m-icon-white"></i>
-				</button>            
+				</button> 
+				<a name="register_sub" href="/main/user/login?isreg=1" class="btn blue pull-right">
+				注册<i class="m-icon-swapright m-icon-white"></i>
+				</a>            
 			</div>
 			<div class="forget-password">
 			</div>
-			<div class="create-account">
+			<div class="create-account">		
 			</div>
 		</form>
 		<!-- END LOGIN FORM -->        
@@ -107,9 +110,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 		</form>
 		<!-- END FORGOT PASSWORD FORM -->
 		<!-- BEGIN REGISTRATION FORM -->
-		<form class="register-form" action="" method="post">
-			<h3 >注册</h3>
-			<div id="reg_error_tip" class="alert alert-danger" style="display:none;">
+		<form class="register-form" action="/main/user/register"  method="post" style="display:none;">
+			<h3 class="form-title">注册账户</h3>
+			<div id="reg_error_tip" class="alert alert-danger" style="display:none;" >
 				<button class="close" data-close="alert"></button>
 				<span id="reg_error_tip_info"></span>
 			</div>
@@ -161,7 +164,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 				<i class="m-icon-swapleft"></i>  返回登录
 				</button>
 				<button type="submit" id="register-submit-btn" class="btn blue pull-right">
-				注册 <i class="m-icon-swapright m-icon-white"></i>
+				注册并登录 <i class="m-icon-swapright m-icon-white"></i>
 				</button>            
 			</div>
 		</form>

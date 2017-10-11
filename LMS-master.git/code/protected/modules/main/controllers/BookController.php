@@ -99,13 +99,13 @@ class BookController extends BackController
             $_REQUEST[$k] = trim($v);
         }
         foreach ($typeinfos as $type){
-            $types[] = $type;
+            $types[]= $type;
         }
-        //var_dump($_REQUEST);exit;
+        //var_dump($types);exit;
         if(isset($_REQUEST['id'])&&$_REQUEST['id']!='') {
             // 修改
-            $bookInfo = $book->getBookType('bid=:bid',array(':bid'=>$_REQUEST['id']));
-            $bookInfo = $bookInfo[0];
+            $bookInfos = $book->getBookType('bid=:bid',array(':bid'=>$_REQUEST['id']));
+            $bookInfo = $bookInfos[0];
             //var_dump($_REQUEST);exit;
             if(isset($_REQUEST['modify'])) {
                 $book->updateByPk($_REQUEST['id'],array(
